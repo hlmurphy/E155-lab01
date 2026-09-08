@@ -13,10 +13,11 @@ module counter #(
     input logic reset,
     input logic enable,
     output logic [N-1:0] count, // Current counter value
-    output logic tick); // High when counter reaches MAX
+    output logic tick,
+    output logic led_blink); // High when counter reaches MAX (tick)
 
     initial count = '0;
-    
+
     always_ff@(posedge clk)
     begin
         if (reset) count <= 0;
@@ -24,6 +25,12 @@ module counter #(
             if (count == MAX) count <= 0;
             else count <= count + 1;
         end
+    end
+
+    // Toggle the blink output on each tick
+    always_ff @(posedge clk) begin
+        if (reset) led_blink <= 0;
+        else if (tick) led_blink <= ~led_blink;
     end
     assign tick = (count == MAX);
 endmodule

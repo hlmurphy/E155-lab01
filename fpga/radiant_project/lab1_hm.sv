@@ -21,14 +21,8 @@ module lab1_hm  #(parameter int blink_max = 9_999_999)(
     // Seven-segment display decoder
     seven_segment_decoder u_dec (.data(s), .segments(seg));
 
-    // Clock divider for blinking LED (2.4Hz)
+    // Counter for blinking LED
     logic tick;
     counter #(.MAX(blink_max))
-    u_counter (.clk(clk), .reset(1'b0), .enable(1'b1), .count(), .tick(tick));
-    logic blink = 1'b0;
-    always_ff @(posedge clk) begin
-        if (tick) blink <= ~blink;
-    end
-    assign led[2] = blink;
-    
+    u_counter (.clk(clk), .reset(1'b0), .enable(1'b1), .count(), .tick(tick), .led_blink(led[2]));
 endmodule
