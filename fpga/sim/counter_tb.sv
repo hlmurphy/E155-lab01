@@ -12,8 +12,9 @@ module counter_tb;
     logic [3:0] count;
     logic       tick;
     int         errors = 0;
+    logic       led_blink;
 
-    counter #(.N(4), .MAX(9)) dut (.clk(clk), .reset(reset), .enable(enable), .count(count), .tick(tick), .led_blink());
+    counter #(.N(4), .MAX(9)) dut (.clk(clk), .reset(reset), .enable(enable), .count(count), .tick(tick), .led_blink(led_blink));
 
     always begin
      clk = 1; #5;
@@ -34,22 +35,18 @@ module counter_tb;
 
         // disabled — count holds
         reset = 0;
-        @(posedge clk); @(posedge clk); 
-        #1;
+        @(posedge clk); 
         if (count !== 4'd0) errors++;
 
         // enable — count increments
         enable = 1;
         @(posedge clk); 
-        #1; 
         if (count !== 4'd1) errors++;
         @(posedge clk); 
-        #1; 
         if (count !== 4'd2) errors++;
 
         // advance to MAX — tick asserts
         repeat (7) @(posedge clk); 
-        #1;
         if (count !== 4'd9 || tick !== 1'b1) errors++;
 
         // wrap — count clears, tick drops
@@ -59,6 +56,7 @@ module counter_tb;
 
         if (errors == 0) $display("counter PASSED");
         else $display("counter FAILED: %0d errors", errors);
+        #500;
         $finish;
     end
 endmodule
