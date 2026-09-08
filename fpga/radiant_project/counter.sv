@@ -18,7 +18,7 @@ module counter #(
 
     initial count = '0;
 
-    always_ff@(posedge clk)
+    always @(posedge clk)
     begin
         if (reset) count <= 0;
         else if (enable) begin
@@ -28,7 +28,7 @@ module counter #(
     end
 
     // Toggle the blink output on each tick
-    always_ff @(posedge clk) begin
+    always  @(posedge clk) begin
         if (reset) led_blink <= 0;
         else if (tick) led_blink <= ~led_blink;
     end
