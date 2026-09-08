@@ -5,49 +5,47 @@
 // Course: HMC E155, Lab 1
 // Purpose: Testbench for counter module 
 // -------------------------------------------------------------
-`timescale 1ns/1ns
-`default_nettype none
-`define N_TV 8
 
 module counter_tb;
-    // Testbench signals
-    logic clk = 0;
-    logic reset;
-    logic enable;
+    logic       clk = 0;
+    logic       reset, enable;
     logic [3:0] count;
-    logic tick;
+    logic       tick;
+    int         errors = 0;
 
     counter #(.N(4), .MAX(9)) dut (
-        .clk(clk),
-        .reset(reset),
-        .enable(enable),
-        .count(count),
-        .tick(tick)
+        .clk(clk), .reset(reset), .enable(enable),
+        .count(count), .tick(tick)
     );
+
     always #5 clk = ~clk;
 
     initial begin
-        // Test 1: reset
-        reset = 1;
-        enable = 0;
-        #20;
+        // reset clears count
+        reset = 1; enable = 0;
+        @(posedge clk); @(posedge clk); #1;
+        if (count !== 4'd0) errors++;
 
-        // Test 2: release reset, still disabled
+        // disabled — count holds
         reset = 0;
-        #30;
+        @(posedge clk); @(posedge clk); #1;
+        if (count !== 4'd0) errors++;
 
-        // Test 3: enable counting
+        // enable — count increments
         enable = 1;
-        #200;
+        @(posedge clk); #1; if (count !== 4'd1) errors++;
+        @(posedge clk); #1; if (count !== 4'd2) errors++;
 
-        // Test 4: disable counting
-        enable = 0;
-        #30;
+        // advance to MAX — tick asserts
+        repeat (7) @(posedge clk); #1;
+        if (count !== 4'd9 || tick !== 1'b1) errors++;
 
-        // Test 5: reset re-enabled 
-        reset = 1;
-        #20;
+        // wrap — count clears, tick drops
+        @(posedge clk); #1;
+        if (count !== 4'd0 || tick !== 1'b0) errors++;
+
+        if (errors == 0) $display("counter PASSED");
+        else             $display("counter FAILED: %0d errors", errors);
         $finish;
     end
-
 endmodule

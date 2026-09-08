@@ -7,60 +7,34 @@
 // -------------------------------------------------------------
 `timescale 1ns/1ns
 `default_nettype none
-`define N_TV 16
 
 module seven_segment_decoder_tb;
-
-    // Testbench signals
-    logic clk = 0;
-    logic reset;
     logic [3:0] data;
-    logic [6:0] segments, segments_expected;
-    logic [31:0] vectornum, errors;
-    logic [10:0] testvectors[10000:0]; //format data[3:0]_expected_segments[6:0]
+    logic [6:0] segments;
+    int         errors = 0;
 
-
-    // Instantiate the seven_segment_decoder
-    seven_segment_decoder dut (
-        .data(data),
-        .segments(segments)
-    );
-
-    always begin
-        clk = 1;
-        #5;
-        clk = 0;
-        #5;
-    end
-
+    seven_segment_decoder dut (.data(data), .segments(segments));
+    
     initial begin
-        $readmemb("decoder_testvectors.tv", testvectors, 0, `N_TV-1); 
-        vectornum = 0;
-        errors = 0;
-        reset = 1;
-        #20;
-        reset = 0;
-    end
+        data = 4'h0; #1; if (segments !== 7'b0000001) errors++;
+        data = 4'h1; #1; if (segments !== 7'b1001111) errors++;
+        data = 4'h2; #1; if (segments !== 7'b0010010) errors++;
+        data = 4'h3; #1; if (segments !== 7'b0000110) errors++;
+        data = 4'h4; #1; if (segments !== 7'b1001100) errors++;
+        data = 4'h5; #1; if (segments !== 7'b0100100) errors++;
+        data = 4'h6; #1; if (segments !== 7'b0100000) errors++;
+        data = 4'h7; #1; if (segments !== 7'b0001111) errors++;
+        data = 4'h8; #1; if (segments !== 7'b0000000) errors++;
+        data = 4'h9; #1; if (segments !== 7'b0000100) errors++;
+        data = 4'hA; #1; if (segments !== 7'b0001000) errors++;
+        data = 4'hB; #1; if (segments !== 7'b1100000) errors++;
+        data = 4'hC; #1; if (segments !== 7'b0110001) errors++;
+        data = 4'hD; #1; if (segments !== 7'b1000010) errors++;
+        data = 4'hE; #1; if (segments !== 7'b0110000) errors++;
+        data = 4'hF; #1; if (segments !== 7'b0111000) errors++;
 
-    always @(posedge clk) begin
-        #1;
-        {data, segments_expected} = testvectors[vectornum];
+        if (errors == 0) $display("decoder PASSED");
+        else $display("decoder FAILED: %0d errors", errors);
+        $finish;
     end
-
-    always @(negedge clk) begin
-        if (~reset) begin   // skip during reset window
-            if (segments !== segments_expected) begin
-                $display("Error: data=%h", data);
-                $display("  segments=%b (%b expected)", segments, segments_expected);
-                errors = errors + 1;
-            end
-            vectornum = vectornum + 1;
-            if (testvectors[vectornum] === 11'bx) begin
-                $display("%d tests completed with %d errors.", vectornum, errors);
-                $finish;
-            end
-        end
-    end
-
 endmodule
-
