@@ -31,7 +31,7 @@ module lab01_tb;
     end
 
     initial begin
-        $readmemb("lab1_hm_testvectors.tv", testvectors, 0, `N_TV - 1 ); // Load test vectors from a file
+        $readmemb("C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab01_sim/lab1_hm_testvectors.tv", testvectors, 0, `N_TV - 1 ); // Load test vectors from a file
         vectornum = 0;
         errors = 0;
         tb_reset = 1;
