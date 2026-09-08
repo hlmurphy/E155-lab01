@@ -8,8 +8,8 @@
 
 module counter #(
     parameter N = 24,
-    parameter MAX = 9_999_999// 48_000_000 / (2 * 2.4) - 1)(
-    input logic clk, // Clock signal dervied from internal HSOSC
+    parameter MAX = 9_999_999)// 48_000_000 / (2 * 2.4) - 1)(
+    (input logic clk, // Clock signal dervied from internal HSOSC
     input logic reset,
     input logic enable,
     output logic [N-1:0] count, // Current counter value
