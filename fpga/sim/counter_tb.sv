@@ -13,10 +13,7 @@ module counter_tb;
     logic       tick;
     int         errors = 0;
 
-    counter #(.N(4), .MAX(9)) dut (
-        .clk(clk), .reset(reset), .enable(enable),
-        .count(count), .tick(tick)
-    );
+    counter #(.N(4), .MAX(9)) dut (.clk(clk), .reset(reset), .enable(enable), .count(count), .tick(tick), .led_blink());
 
     always begin
      clk = 1; #5;
@@ -30,7 +27,10 @@ module counter_tb;
         #10
         assert (count === 4'd0) 
             $display("PASSED! At time: %0t.", $time);
-            else $error("FAILED! At time: %0t.", $time) errors++;
+            else begin
+                $error("FAILED! At time: %0t.", $time);
+                errors++;
+            end
 
         // disabled — count holds
         reset = 0;
