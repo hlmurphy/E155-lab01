@@ -22,5 +22,5 @@ module counter #(
             else count <= count + 1;
         end
     end
-    assign tick = (c ount == MAX);
+    assign tick = (count == MAX);
 endmodule
