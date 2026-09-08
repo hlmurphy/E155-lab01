@@ -18,7 +18,10 @@ module counter_tb;
         .count(count), .tick(tick)
     );
 
-    always #5 clk = ~clk;
+    always begin
+     clk = 1; #5;
+     clk = 0; #5;
+     end
 
     initial begin
         // reset clears count

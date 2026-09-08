@@ -14,6 +14,9 @@ module counter #(
     input logic enable,
     output logic [N-1:0] count, // Current counter value
     output logic tick); // High when counter reaches MAX
+
+    initial count = '0;
+    
     always_ff@(posedge clk)
     begin
         if (reset) count <= 0;
