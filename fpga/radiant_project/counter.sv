@@ -17,6 +17,7 @@ module counter #(
     output logic led_blink); // High when counter reaches MAX (tick)
 
     initial count = '0;
+    initial led_blink = '0;
 
     always @(posedge clk)
     begin
