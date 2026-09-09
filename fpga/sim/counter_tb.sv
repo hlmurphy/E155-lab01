@@ -36,14 +36,29 @@ module counter_tb;
         // disabled — count holds
         reset = 0;
         @(posedge clk); 
-        if (count !== 4'd0) errors++;
+        if (count !== 4'd0) 
+        $display("PASSED! At time: %0t.", $time);
+            else begin
+                $error("FAILED! At time: %0t.", $time);
+                errors++;
+            end
 
         // enable — count increments
         enable = 1;
         @(posedge clk); 
-        if (count !== 4'd1) errors++;
+        if (count !== 4'd1) 
+        $display("PASSED! At time: %0t.", $time);
+            else begin
+                $error("FAILED! At time: %0t.", $time);
+                errors++;
+            end
         @(posedge clk); 
-        if (count !== 4'd2) errors++;
+        if (count !== 4'd2) 
+        $display("PASSED! At time: %0t.", $time);
+            else begin
+                $error("FAILED! At time: %0t.", $time);
+                errors++;
+            end
 
         // advance to MAX — tick asserts
         repeat (7) @(posedge clk); 
