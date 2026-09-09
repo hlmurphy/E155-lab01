@@ -27,63 +27,21 @@ module counter_tb;
         reset = 1; 
         enable = 0;
         #30
+        // disabled — count holds until next clock cycle
         reset = 0;
         @(posedge clk);
+
+        // start counter to run until max count several times
         enable = 1;
         #300;
+
+        // reset clears count and holds it at zero until renabled
         reset = 1;
-        #10
+        #
+        
+        // reset is shut off to resume the counter for the remainder of the simulation
         reset = 0;
         #800;
-
-
-
-        // assert (count === 4'd0) 
-        //     $display("PASSED! At time: %0t.", $time);
-        //     else begin
-        //         $error("FAILED! At time: %0t.", $time);
-        //         errors++;
-        //     end
-
-        // // disabled — count holds
-        // reset = 0;
-        // @(posedge clk); 
-        // if (count !== 4'd0) 
-        // $display("PASSED! At time: %0t.", $time);
-        //     else begin
-        //         $error("FAILED! At time: %0t.", $time);
-        //         errors++;
-        //     end
-
-        // // enable — count increments
-        // enable = 1;
-        // @(posedge clk); 
-        // if (count !== 4'd1) 
-        // $display("PASSED! At time: %0t.", $time);
-        //     else begin
-        //         $error("FAILED! At time: %0t.", $time);
-        //         errors++;
-        //     end
-        // @(posedge clk); 
-        // if (count !== 4'd2) 
-        // $display("PASSED! At time: %0t.", $time);
-        //     else begin
-        //         $error("FAILED! At time: %0t.", $time);
-        //         errors++;
-        //     end
-
-        // // advance to MAX — tick asserts
-        // repeat (7) @(posedge clk); 
-        // if (count !== 4'd9 || tick !== 1'b1) errors++;
-
-        // // wrap — count clears, tick drops
-        // @(posedge clk); 
-        // #1;
-        // if (count !== 4'd0 || tick !== 1'b0) errors++;
-
-        // if (errors == 0) $display("counter PASSED");
-        // else $display("counter FAILED: %0d errors", errors);
-        //#500;
         $finish;
     end
 endmodule
