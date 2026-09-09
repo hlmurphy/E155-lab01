@@ -12,14 +12,12 @@ module counter #(
     (input logic clk, // Clock signal dervied from internal HSOSC
     input logic reset,
     input logic enable,
-    output logic [N-1:0] count, // Current counter value
+    output logic [N-1:0] count = '0, // Current counter value
     output logic tick,
-    output logic led_blink); // High when counter reaches MAX (tick)
+    output logic led_blink = '0); // High when counter reaches MAX (tick)
 
-    initial count = '0;
-    initial led_blink = '0;
 
-    always @(posedge clk)
+    always_ff@(posedge clk)
     begin
         if (reset) count <= 0;
         else if (enable) begin
@@ -29,7 +27,7 @@ module counter #(
     end
 
     // Toggle the blink output on each tick
-    always @(posedge clk) begin
+    always_ff@(posedge clk) begin
         if (reset) led_blink <= 0;
         else if (tick) led_blink <= ~led_blink;
     end
