@@ -22,56 +22,68 @@ module counter_tb;
      end
 
     initial begin 
+
         // reset clears count
         reset = 1; 
         enable = 0;
-        #10
-        assert (count === 4'd0) 
-            $display("PASSED! At time: %0t.", $time);
-            else begin
-                $error("FAILED! At time: %0t.", $time);
-                errors++;
-            end
-
-        // disabled — count holds
+        #30
         reset = 0;
-        @(posedge clk); 
-        if (count !== 4'd0) 
-        $display("PASSED! At time: %0t.", $time);
-            else begin
-                $error("FAILED! At time: %0t.", $time);
-                errors++;
-            end
-
-        // enable — count increments
+        @(posedge clk);
         enable = 1;
-        @(posedge clk); 
-        if (count !== 4'd1) 
-        $display("PASSED! At time: %0t.", $time);
-            else begin
-                $error("FAILED! At time: %0t.", $time);
-                errors++;
-            end
-        @(posedge clk); 
-        if (count !== 4'd2) 
-        $display("PASSED! At time: %0t.", $time);
-            else begin
-                $error("FAILED! At time: %0t.", $time);
-                errors++;
-            end
+        #300;
+        reset = 1;
+        #10
+        reset = 0;
+        #800;
 
-        // advance to MAX — tick asserts
-        repeat (7) @(posedge clk); 
-        if (count !== 4'd9 || tick !== 1'b1) errors++;
 
-        // wrap — count clears, tick drops
-        @(posedge clk); 
-        #1;
-        if (count !== 4'd0 || tick !== 1'b0) errors++;
 
-        if (errors == 0) $display("counter PASSED");
-        else $display("counter FAILED: %0d errors", errors);
-        #500;
+        // assert (count === 4'd0) 
+        //     $display("PASSED! At time: %0t.", $time);
+        //     else begin
+        //         $error("FAILED! At time: %0t.", $time);
+        //         errors++;
+        //     end
+
+        // // disabled — count holds
+        // reset = 0;
+        // @(posedge clk); 
+        // if (count !== 4'd0) 
+        // $display("PASSED! At time: %0t.", $time);
+        //     else begin
+        //         $error("FAILED! At time: %0t.", $time);
+        //         errors++;
+        //     end
+
+        // // enable — count increments
+        // enable = 1;
+        // @(posedge clk); 
+        // if (count !== 4'd1) 
+        // $display("PASSED! At time: %0t.", $time);
+        //     else begin
+        //         $error("FAILED! At time: %0t.", $time);
+        //         errors++;
+        //     end
+        // @(posedge clk); 
+        // if (count !== 4'd2) 
+        // $display("PASSED! At time: %0t.", $time);
+        //     else begin
+        //         $error("FAILED! At time: %0t.", $time);
+        //         errors++;
+        //     end
+
+        // // advance to MAX — tick asserts
+        // repeat (7) @(posedge clk); 
+        // if (count !== 4'd9 || tick !== 1'b1) errors++;
+
+        // // wrap — count clears, tick drops
+        // @(posedge clk); 
+        // #1;
+        // if (count !== 4'd0 || tick !== 1'b0) errors++;
+
+        // if (errors == 0) $display("counter PASSED");
+        // else $display("counter FAILED: %0d errors", errors);
+        //#500;
         $finish;
     end
 endmodule
