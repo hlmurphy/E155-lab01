@@ -1,0 +1,32 @@
+----------------------------------------------------------------------
+Report for cell lab1_hm.TECH
+Register bits:  25 of 5280 (0.473%)
+I/O cells:      14
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               CCU2        13          100.0
+                            FD1P3XZ        25          100.0
+                         HSOSC_CORE         1          100.0
+                                 IB         4          100.0
+                               LUT4        18          100.0
+                                 OB        10          100.0
+SUB MODULES
+                            counter         1
+              seven_segment_decoder         1
+                              TOTAL        73
+----------------------------------------------------------------------
+Report for cell counter.v1
+Instance Path : u_counter
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                                FA2        13          100.0
+                            FD1P3XZ        25          100.0
+                               LUT4         9           50.0
+                              TOTAL        47
+----------------------------------------------------------------------
+Report for cell seven_segment_decoder.v1
+Instance Path : u_dec
+                                  Cell usage:
+                               cell     count   Res Usage(%)
+                               LUT4         7           38.9
+                              TOTAL         7

@@ -1,0 +1,57 @@
+#Start recording tcl command: 9/8/2026 18:09:25
+#Project Location: C:/Users/hmurphy/Downloads/E155/lab1_murphy; Project name: lab1_murphy
+prj_open "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_murphy.rdf"
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_murphy.pdc"
+prj_enable_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_murphy.pdc"
+prj_run Synthesis -impl impl_1
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_counter/lab1_sim_counter.spf"
+prj_add_source "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/counter_tb.sv" "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/lab1_hm_tb.sv" "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/seven_segment_decoder_tb.sv"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_seven/lab1_sim_seven.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run Synthesis -impl impl_1
+prj_run Synthesis -impl impl_1
+prj_run Synthesis -impl impl_1
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_disable_source "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/counter_tb.sv"
+prj_disable_source "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/seven_segment_decoder_tb.sv"
+prj_disable_source "C:/Users/hmurphy/Documents/GitHub/E155-lab01/fpga/sim/lab1_hm_tb.sv"
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_set_impl_opt -impl "impl_1" {top} {lab1_hm}
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run PAR -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run PAR -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_count/lab1_sim_count.spf"
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_count/lab1_sim_count.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_count/lab1_sim_count.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_seven/lab1_sim_seven.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_add_source "C:/Users/hmurphy/Downloads/E155/lab1_murphy/lab1_sim_top/lab1_sim_top.spf"
+prj_run Export -impl impl_1
+prj_run Export -impl impl_1
+#Stop recording: 9/8/2026 20:27:43
