@@ -7,8 +7,8 @@ module lab1_hm_tb;
     lab1_hm #(.blink_max(4)) dut (.s(s), .led(led), .seg(seg));
     
     initial begin
-        #20
         // XOR Gate Conditions
+        #1
         s = 4'b0000;
         #10
         assert (led[0] === 0 && led[1] === 0)
@@ -54,7 +54,7 @@ module lab1_hm_tb;
         end
 
         // Blinking LED[2]
-        #1000
+        #500
         if (errors == 0)
             $display("All tests PASSED!");
         else
